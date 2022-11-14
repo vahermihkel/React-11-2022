@@ -8,6 +8,7 @@ import MuudaToode from "./pages/MuudaToode";
 import Poed from "./pages/Poed";
 import Seaded from "./pages/Seaded";
 import YksikToode from "./pages/YksikToode";
+import Meist from './pages/Meist';
 
 // KUI midagi ei tööta, on 2 kohta mida vaadata:
 
@@ -37,6 +38,9 @@ function App() {
       <Link to="/seaded">
         <button className="nupp">Seaded</button>
       </Link>
+      <Link to="/meist">
+        <button className="nupp">Meist</button>
+      </Link>
 
       <Routes>
         {/* err.ee   --->     Avaleht.js sisu */}
@@ -48,6 +52,7 @@ function App() {
           <Route path="poed" element={ <Poed /> } />
           <Route path="seaded" element={ <Seaded /> } />
           <Route path="toode" element={ <YksikToode /> } />
+          <Route path="meist" element={ <Meist /> } />
       </Routes>
 
 
