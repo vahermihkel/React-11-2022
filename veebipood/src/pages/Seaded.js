@@ -3,21 +3,6 @@ import { useRef, useState } from "react";
 function Seaded() {
   const [keel, uuendaKeel] = useState(localStorage.getItem("keel") || "est");
 
-  const muudaKeelEst = () => {
-    uuendaKeel("est");
-    localStorage.setItem("keel", "est");
-  }
-
-  const muudaKeelEng = () => {
-    uuendaKeel("eng");
-    localStorage.setItem("keel", "eng");
-  }
-
-  const muudaKeelRus = () => {
-    uuendaKeel("rus");
-    localStorage.setItem("keel", "rus");
-  }
-
   const telefonViide = useRef(); // telefonRef (reference)
   const emailViide = useRef(); // emailRef
 
@@ -29,11 +14,31 @@ function Seaded() {
     localStorage.setItem("email", emailViide.current.value);
   }
 
+  // const muudaKeelEst = () => {
+  //   uuendaKeel("est");
+  //   localStorage.setItem("keel", "est");
+  // }
+
+  // const muudaKeelEng = () => {
+  //   uuendaKeel("eng");
+  //   localStorage.setItem("keel", "eng");
+  // }
+
+  // const muudaKeelRus = () => {
+  //   uuendaKeel("rus");
+  //   localStorage.setItem("keel", "rus");
+  // }
+
+  const muudaKeel = (uusKeel) => {
+    uuendaKeel(uusKeel);
+    localStorage.setItem("keel", uusKeel);
+  }
+
   return ( 
     <div>
-      <button onClick={muudaKeelEst}>Eesti</button>
-      <button onClick={muudaKeelEng}>Inglise</button>
-      <button onClick={muudaKeelRus}>Vene</button>
+      <button onClick={() => muudaKeel("est")}>Eesti</button>
+      <button onClick={() => muudaKeel("eng")}>Inglise</button>
+      <button onClick={() => muudaKeel("rus")}>Vene</button>
      { keel === "est" && <div>Lehekülg on eesti keelne</div> }
      { keel === "eng" && <div>Lehekülg on inglise keelne</div> }
      { keel === "rus" && <div>Lehekülg on vene keelne</div> }
