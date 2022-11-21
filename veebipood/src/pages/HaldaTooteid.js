@@ -1,6 +1,26 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function HaldaTooteid() {
-  return ( <div>HaldaTooteid</div> );
+  const [tooted, muudaTooted] = useState(JSON.parse(localStorage.getItem("tooted")) || []);
+
+  const kustuta = (index) => {
+    tooted.splice(index,1);
+    muudaTooted(tooted.slice()); // HTMLi uuenduseks
+    localStorage.setItem("tooted", JSON.stringify(tooted)); // salvestuseks
+  }
+
+  return ( 
+    <div>
+      {tooted.map((element, index) => 
+        <div key={index}>
+          {element}
+          <button onClick={() => kustuta(index)}>Kustuta</button>
+          <Link to={"/muuda/" + index}>
+            <button>Muuda</button>
+          </Link>
+        </div>)}
+    </div> );
 }
 
 export default HaldaTooteid;

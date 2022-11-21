@@ -9,6 +9,8 @@ import Poed from "./pages/Poed";
 import Seaded from "./pages/Seaded";
 import YksikToode from "./pages/YksikToode";
 import Meist from './pages/Meist';
+import Tooted from './pages/Tooted';
+import Albums from './pages/Albums';
 
 // KUI midagi ei tööta, on 2 kohta mida vaadata:
 
@@ -26,8 +28,14 @@ function App() {
       <Link to="/">
         <img className="pilt" src="https://estonia.ee/wp-content/uploads/nobe_netist_4.jpg" alt="" />
       </Link>
+      <Link to="/tooted">
+        <button className="nupp">Tooted</button>
+      </Link>
       <Link to="/ostukorv">
         <button className="nupp">Ostukorvi</button>
+      </Link>
+      <Link to="/lisa-toode">
+        <button className="nupp">Lisa toode</button>
       </Link>
       <Link to="/halda">
         <button className="nupp">Toodeid haldama</button>
@@ -41,18 +49,23 @@ function App() {
       <Link to="/meist">
         <button className="nupp">Meist</button>
       </Link>
+      <Link to="/albumid">
+        <button className="nupp">Albumid</button>
+      </Link>
 
       <Routes>
         {/* err.ee   --->     Avaleht.js sisu */}
           <Route path="" element={ <Avaleht /> } />
+          <Route path="tooted" element={ <Tooted /> } />
           <Route path="ostukorv" element={ <Ostukorv /> } />
           <Route path="lisa-toode" element={ <LisaToode /> } />
           <Route path="halda" element={ <HaldaTooteid /> } />
-          <Route path="muuda" element={ <MuudaToode /> } />
+          <Route path="muuda/:j2rjekorraNumber" element={ <MuudaToode /> } />
           <Route path="poed" element={ <Poed /> } />
           <Route path="seaded" element={ <Seaded /> } />
-          <Route path="toode" element={ <YksikToode /> } />
+          <Route path="toode/:index" element={ <YksikToode /> } />
           <Route path="meist" element={ <Meist /> } />
+          <Route path="albumid" element={ <Albums /> } />
       </Routes>
 
 
