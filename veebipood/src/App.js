@@ -11,6 +11,7 @@ import YksikToode from "./pages/YksikToode";
 import Meist from './pages/Meist';
 import Tooted from './pages/Tooted';
 import Albums from './pages/Albums';
+import Coop from './pages/Coop';
 
 // KUI midagi ei tööta, on 2 kohta mida vaadata:
 
@@ -52,6 +53,9 @@ function App() {
       <Link to="/albumid">
         <button className="nupp">Albumid</button>
       </Link>
+      <Link to="/coop">
+        <button className="nupp">Coop tooted</button>
+      </Link>
 
       <Routes>
         {/* err.ee   --->     Avaleht.js sisu */}
@@ -66,6 +70,7 @@ function App() {
           <Route path="toode/:index" element={ <YksikToode /> } />
           <Route path="meist" element={ <Meist /> } />
           <Route path="albumid" element={ <Albums /> } />
+          <Route path="coop" element={ <Coop /> } />
       </Routes>
 
 

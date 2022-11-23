@@ -7,6 +7,9 @@ import { useRef, useState } from "react";
 function LisaToode() {
   const [sonum, uuendaSonum] = useState("Lisa uus toode!");
   const nimiViide = useRef();
+  const hindViide = useRef();
+  const piltViide = useRef();
+  const aktiivneViide = useRef();
 
   function lisa() {
     if (nimiViide.current.value === "") {
@@ -26,15 +29,19 @@ function LisaToode() {
 
       let tootedLS = localStorage.getItem("tooted");
       tootedLS = JSON.parse(tootedLS) || [];
-      tootedLS.push(nimiViide.current.value);
+      const uusToode = {
+        "nimi": nimiViide.current.value,
+        "hind": Number(hindViide.current.value),
+        "pilt": piltViide.current.value,
+        "aktiivne": aktiivneViide.current.checked,
+      }
+      tootedLS.push(uusToode);
       tootedLS = JSON.stringify(tootedLS);
       localStorage.setItem("tooted", tootedLS);
 
       // const tooted = JSON.parse(localStorage.getItem("tooted")) || [];
       // tooted.push(nimiViide.current.value);
-      // localStorage.setItem("tooted", JSON.stringify(tooted));
-
-            
+      // localStorage.setItem("tooted", JSON.stringify(tooted));   
       // localStorage.setItem("võti", "uus_väärtus")
       uuendaSonum("Uus toode lisatud: " + nimiViide.current.value);
     }
@@ -45,6 +52,12 @@ function LisaToode() {
       <div>{sonum}</div>
       <label>Toote nimi</label> <br />
       <input ref={nimiViide} type="text" /> <br />
+      <label>Toote hind</label> <br />
+      <input ref={hindViide} type="number" /> <br />
+      <label>Toote pilt</label> <br />
+      <input ref={piltViide} type="text" /> <br />
+      <label>Toote aktiivsus</label> <br />
+      <input ref={aktiivneViide} type="checkbox" /> <br />
       <button onClick={lisa}>Lisa uus toode</button> <br />
     </div> );
 }
