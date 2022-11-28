@@ -2,6 +2,7 @@
 const Cart = () => {
   // KODUS: Ostukorvi loogika eesti keelse projekti järgi
   // Kuvage välja kõik ostukorvi esemed
+  // a) peast   b) proovida mõne kodutöö järgi   c) eesti keelsest projektist vaadata
   
   const removeFromCart = (index) => {}
 
