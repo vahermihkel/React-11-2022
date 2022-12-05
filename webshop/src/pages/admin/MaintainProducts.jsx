@@ -1,12 +1,13 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import productsFromFile from "../../data/products.json";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { useRef, useState } from "react";
 
 const MaintainProducts = () => {
   const [products, setProducts] = useState(productsFromFile);
   const { t } = useTranslation();
+  const searchedRef = useRef();
 
   const remove = (i) => {
     productsFromFile.splice(i,1);
@@ -17,10 +18,16 @@ const MaintainProducts = () => {
       });
   }
 
-  // otsingumootor -> otsi toodet nime alusel
+  const searchProducts = () => {
+    const result = productsFromFile.filter(element =>
+      element.name.toLowerCase().includes(searchedRef.current.value.toLowerCase()));
+    setProducts(result);
+  }
 
   return (
     <div>
+      <input ref={searchedRef} onChange={searchProducts} type="text" />
+      <div>{products.length} tk</div>
       {products.map((element, index) => 
         <div key={element.id}>
           <img src={element.image} alt="" />
@@ -39,4 +46,4 @@ const MaintainProducts = () => {
   )
 }
 
-export default MaintainProducts
+export default MaintainProducts;

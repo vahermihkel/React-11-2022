@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import productsFromFile from "../data/products.json";
 
 const Homepage = () => {
@@ -22,9 +23,11 @@ const Homepage = () => {
       <button>Sort price descending</button>
       {productsFromFile.map(element => 
         <div key={element.id}>
-          <img src={element.image} alt="" />
-          <div>{element.name}</div>
-          <div>{element.price}</div>
+          <Link to={"/product/" + element.id}>
+            <img src={element.image} alt="" />
+            <div>{element.name}</div>
+            <div>{element.price}</div>
+          </Link>
           <button>Add to cart</button>
         </div>)}
     </div>
