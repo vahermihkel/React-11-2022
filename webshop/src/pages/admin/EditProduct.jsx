@@ -16,6 +16,13 @@ import productsFromFile from "../../data/products.json";
 // cvonline, cvkeskus
 // LinkedIn, MeetFrank, ettevõtete kodulehed
 
+// endale veebisaiti / väikekaupmehele    Wordpress   2500 eurot
+// FB "Vabakutselised arendajad ja disainerid"
+
+// Reacti 6kuu -> 10 000 - 50 000    NodeJS: express.js   Next.js
+
+// 2-3aastat+ 300 000+ (3.8milj)    React/Angular -  Java
+
 const EditProduct = () => {
   const { id } = useParams();                       //    43146808 === "43146808"
   const productFound = productsFromFile.find(element => element.id === Number(id));
