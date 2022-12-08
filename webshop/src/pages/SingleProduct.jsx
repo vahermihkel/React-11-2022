@@ -1,9 +1,18 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import productsFromFile from "../data/products.json";
+// import productsFromFile from "../data/products.json";
 
 const SingleProduct = () => {
+  const [products, setProducts] = useState([]);
   const { id } = useParams();    
-  const productFound = productsFromFile.find(element => element.id === Number(id));
+  const productFound = products.find(element => element.id === Number(id));
+  const dbUrl = "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json";
+  
+  useEffect(() => {
+    fetch(dbUrl)
+      .then(res => res.json())
+      .then(json => setProducts(json))
+  }, []);
 
   return (
     <div>

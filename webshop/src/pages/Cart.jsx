@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import "../css/Cart.css";
 
@@ -7,6 +7,14 @@ const Cart = () => {
   // Kuvage välja kõik ostukorvi esemed
   // a) peast   b) proovida mõne kodutöö järgi   c) eesti keelsest projektist vaadata
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const [parcelMachines, setParcelMachines] = useState([]);
+
+  useEffect(() => {
+    fetch("https://www.omniva.ee/locations.json")
+      .then(res => res.json())
+      .then(json => setParcelMachines(json));
+  }, []);
+
 
   const removeFromCart = (index) => {
     cart.splice(index,1);
@@ -72,6 +80,12 @@ const Cart = () => {
 
       <div className="cart-bottom">
         {cart.length > 0 && <div>{calculateCartSum()} €</div>}
+
+        <select>
+          {parcelMachines
+            .filter(element => element.A0_NAME === "EE")
+            .map(element => <option key={element.NAME}>{element.NAME}</option>)}
+        </select>
       </div>
     </div>
   )

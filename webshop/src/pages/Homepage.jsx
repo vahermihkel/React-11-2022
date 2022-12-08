@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import productsFromFile from "../data/products.json";
+// import productsFromFile from "../data/products.json";
 
 const Homepage = () => {
+  const [products, setProducts] = useState([]);
+  const dbUrl = "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json";
+  
+  useEffect(() => {
+    fetch(dbUrl)
+      .then(res => res.json())
+      .then(json => setProducts(json))
+  }, []);
 
   // {
   //   "id":11391368,
@@ -48,13 +58,17 @@ const Homepage = () => {
 // ostukorvis koguse muutmine
 // ostukorvi kujundus
 
+  if (products.length === 0) {
+    return (<Spinner />);
+  }
+
   return (
     <div>
       <button>Sort A-Z</button>
       <button>Sort Z-A</button>
       <button>Sort price ascending</button>
       <button>Sort price descending</button>
-      {productsFromFile.map(element => 
+      {products.map(element => 
         <div key={element.id}>
           <Link to={"/product/" + element.id}>
             <img src={element.image} alt="" />

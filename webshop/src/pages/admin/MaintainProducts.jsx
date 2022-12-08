@@ -1,17 +1,28 @@
 import { Link } from "react-router-dom";
-import productsFromFile from "../../data/products.json";
+// import productsFromFile from "../../data/products.json";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const MaintainProducts = () => {
-  const [products, setProducts] = useState(productsFromFile);
+  const [dbProducts, setDbProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const { t } = useTranslation();
   const searchedRef = useRef();
+  const dbUrl = "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json";
+  
+  useEffect(() => {
+    fetch(dbUrl)
+      .then(res => res.json())
+      .then(json => {
+        setProducts(json);
+        setDbProducts(json);
+      })
+  }, []);
 
   const remove = (i) => {
-    productsFromFile.splice(i,1);
-    setProducts(productsFromFile.slice());
+    products.splice(i,1);
+    setProducts(products.slice());
     toast.error(t("successfully-deleted"), {
       position: "bottom-right",
       theme: "dark",
@@ -19,7 +30,7 @@ const MaintainProducts = () => {
   }
 
   const searchProducts = () => {
-    const result = productsFromFile.filter(element =>
+    const result = dbProducts.filter(element =>
       element.name.toLowerCase().includes(searchedRef.current.value.toLowerCase()));
     setProducts(result);
   }

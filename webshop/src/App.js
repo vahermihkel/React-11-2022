@@ -62,3 +62,29 @@ function App() {
 }
 
 export default App;
+
+// 8.12
+// Leaflet kaardirakenduse, kuhu kuvame meie poed
+// API päringuid tegema nr 1 võtame pakiautomaadid Omniva lehelt
+// Firebase-i jälle projekti
+// Paneme ebay tooted Firebase-i
+
+// Firebase-st teeme API päringuid, et sealt andmeid kätte saada
+// Firebase-i hakkame andmeid sisestama API päringute kaudu
+
+// Kategooriad Firebase andmebaasi
+// Poed Firebase andmebaasi
+// Makse API päring
+
+// Dünaamiline CSS klass
+
+// Props ehk child componendid
+
+// useContext ehk globaalsed muutujad
+
+// Sisselogimine/Registreerumine API päringut
+// Karusell-galerii
+// Piltide URL asemel failide üleslaadimine
+// Radio buttonid
+
+// Wordpressi projekt
