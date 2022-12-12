@@ -1,5 +1,7 @@
-import { useRef, useState } from "react";
-import productsFromFile from "../../data/products.json";
+import { useEffect, useRef, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import config from "../../data/config.json";
 
 // hookid   use algusega: useState, useRef, useParams, useNavigate, useTranslate
 // Reacti erikoodid, mida ei eksisteeri tavalises JavaScriptis, lihtsustab
@@ -17,6 +19,14 @@ const AddProduct = () => {
   const descriptionRef = useRef();
   const activeRef = useRef();
   const [idUnique, setIdUnique] = useState(true);
+  const [dbProducts, setDbProducts] = useState([]);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    fetch(config.productsDbUrl)
+      .then(res => res.json())
+      .then(json => setDbProducts(json))
+  }, []);
 
   const addProduct = () => {
     const newProduct = {
@@ -28,12 +38,26 @@ const AddProduct = () => {
       "description": descriptionRef.current.value,
       "active": activeRef.current.checked,
     }
-    productsFromFile.push(newProduct);
+    dbProducts.push(newProduct);
+    fetch(config.productsDbUrl, {"method": "PUT", "body": JSON.stringify(dbProducts)})
+      .then(() => {
+        idRef.current.value = "";
+        nameRef.current.value = "";
+        priceRef.current.value = "";
+        imageRef.current.value = "";
+        categoryRef.current.value = "";
+        descriptionRef.current.value = "";
+        activeRef.current.checked = false;
+        toast.success(t("successfully-added"), { // paneb toasti
+          position: "bottom-right",
+          theme: "dark",
+          });
+      });
   }
 
   const checkIdUniqueness = () => {
-    console.log(idRef.current.value);  // inspect -> console
-    const found = productsFromFile.find(element => element.id === Number(idRef.current.value)); // vt üles ja võrrelge
+    //console.log(idRef.current.value);  // inspect -> console
+    const found = dbProducts.find(element => element.id === Number(idRef.current.value)); // vt üles ja võrrelge
     if (found === undefined) {
       setIdUnique(true);
     } else {
@@ -59,6 +83,7 @@ const AddProduct = () => {
         <label>Active</label> <br />
         <input ref={activeRef} type="checkbox" /> <br />
         <button disabled={idUnique === false} onClick={addProduct}>Add</button>
+        <ToastContainer />
     </div>
   )
 }

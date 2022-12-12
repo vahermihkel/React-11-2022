@@ -78,15 +78,16 @@ const Cart = () => {
           <img className="button remove" onClick={() => removeFromCart(i)} src="/remove.png" alt="" />
         </div>)}
 
-      <div className="cart-bottom">
-        {cart.length > 0 && <div>{calculateCartSum()} €</div>}
+      {cart.length > 0 && 
+        <div className="cart-bottom">
+          <div>{calculateCartSum()} €</div>
 
-        <select>
-          {parcelMachines
-            .filter(element => element.A0_NAME === "EE")
-            .map(element => <option key={element.NAME}>{element.NAME}</option>)}
-        </select>
-      </div>
+          <select>
+            {parcelMachines
+              .filter(element => element.A0_NAME === "EE")
+              .map(element => <option key={element.NAME}>{element.NAME}</option>)}
+          </select>
+        </div>}
     </div>
   )
 }

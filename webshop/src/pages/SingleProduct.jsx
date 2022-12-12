@@ -1,18 +1,27 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import productsFromFile from "../data/products.json";
+import config from "../data/config.json";
+import { Spinner } from "react-bootstrap";
 
 const SingleProduct = () => {
-  const [products, setProducts] = useState([]);
+  const [dbProducts, setDbProducts] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const { id } = useParams();    
-  const productFound = products.find(element => element.id === Number(id));
-  const dbUrl = "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json";
+  const productFound = dbProducts.find(element => element.id === Number(id));
   
   useEffect(() => {
-    fetch(dbUrl)
+    setLoading(true)
+    fetch(config.productsDbUrl)
       .then(res => res.json())
-      .then(json => setProducts(json))
+      .then(json => {
+        setDbProducts(json);
+        setLoading(false);
+      })
   }, []);
+
+  if (isLoading === true) {
+    return (<Spinner />);
+  }
 
   return (
     <div>

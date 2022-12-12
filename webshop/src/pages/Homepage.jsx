@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-// import productsFromFile from "../data/products.json";
+import config from "../data/config.json";
 
 const Homepage = () => {
   const [products, setProducts] = useState([]);
-  const dbUrl = "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json";
+  const [dbProducts, setDbProducts] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const categories = [...new Set(dbProducts.map(element => element.category))];
   
   useEffect(() => {
-    fetch(dbUrl)
+    setLoading(true)
+    fetch(config.productsDbUrl)
       .then(res => res.json())
-      .then(json => setProducts(json))
+      .then(json => {
+        setProducts(json);
+        setDbProducts(json);
+        setLoading(false);
+      })
   }, []);
 
   // {
@@ -58,16 +65,51 @@ const Homepage = () => {
 // ostukorvis koguse muutmine
 // ostukorvi kujundus
 
-  if (products.length === 0) {
+  const sortAZ = () => {
+    products.sort((a,b) => a.name.localeCompare(b.name));
+    setProducts(products.slice());
+  }
+
+  const sortZA = () => {
+    products.sort((a,b) => b.name.localeCompare(a.name));
+    setProducts(products.slice());
+  }
+
+  const sortPriceAsc = () => {
+    products.sort((a,b) => a.price - b.price);
+    setProducts(products.slice());
+  }
+
+  const sortPriceDesc = () => {
+    products.sort((a,b) => b.price - a.price);
+    setProducts(products.slice());
+  }
+
+  const filterProducts = (categoryClicked) => {
+    // console.log(categoryClicked);
+    // console.log(products);
+    const result = dbProducts.filter(element => element.category === categoryClicked);
+    // console.log(result);
+    setProducts(result);
+  }
+
+  if (isLoading === true) {
     return (<Spinner />);
   }
 
   return (
     <div>
-      <button>Sort A-Z</button>
-      <button>Sort Z-A</button>
-      <button>Sort price ascending</button>
-      <button>Sort price descending</button>
+      <button onClick={sortAZ}>Sort A-Z</button>
+      <button onClick={sortZA}>Sort Z-A</button>
+      <button onClick={sortPriceAsc}>Sort price ascending</button>
+      <button onClick={sortPriceDesc}>Sort price descending</button>
+      <div>{products.length} tk</div>
+      {/* <button onClick={() => filterProducts("camping")}>camping</button>
+      <button onClick={() => filterProducts("tent")}>tent</button>
+      <button onClick={() => filterProducts("ebay")}>ebay</button> */}
+      { categories.map(element => 
+        <button key={element} onClick={() => filterProducts(element)}>{element}</button>
+        ) }
       {products.map(element => 
         <div key={element.id}>
           <Link to={"/product/" + element.id}>

@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import productsFromFile from "../../data/products.json";
+import config from "../../data/config.json";
 
 // 10 töötajaga tiim
 // 5 arendajat ---> kirjutavad koodi
@@ -24,10 +25,12 @@ import productsFromFile from "../../data/products.json";
 // 2-3aastat+ 300 000+ (3.8milj)    React/Angular -  Java
 
 const EditProduct = () => {
+  const [dbProducts, setDbProducts] = useState([]);
   const { id } = useParams();                       //    43146808 === "43146808"
-  const productFound = productsFromFile.find(element => element.id === Number(id));
-  const index = productsFromFile.indexOf(productFound);
+  const productFound = dbProducts.find(element => element.id === Number(id));
+  const index = dbProducts.indexOf(productFound);
   const [idUnique, setIdUnique] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   const idRef = useRef();
   const nameRef = useRef();
@@ -37,6 +40,16 @@ const EditProduct = () => {
   const descriptionRef = useRef();
   const activeRef = useRef();
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    setLoading(true)
+    fetch(config.productsDbUrl)
+      .then(res => res.json())
+      .then(json => {
+        setDbProducts(json);
+        setLoading(false);
+      })
+  }, []);
 
   const changeProduct = () => {
     const updatedProduct = {
@@ -48,8 +61,9 @@ const EditProduct = () => {
       "description": descriptionRef.current.value,
       "active": activeRef.current.checked,
     }
-    productsFromFile[index] = updatedProduct;
-    navigate("/admin/maintain-products");
+    dbProducts[index] = updatedProduct;
+    fetch(config.productsDbUrl, {"method": "PUT", "body": JSON.stringify(dbProducts)})
+      .then(() => navigate("/admin/maintain-products"))
   }
 
   // kontroll peale, kas on unikaalne ID
@@ -60,12 +74,16 @@ const EditProduct = () => {
       return; // ära siit edasi mine (funktsioon lõppeb)
     } 
 
-    const found = productsFromFile.find(element => element.id === Number(idRef.current.value)); // vt üles ja võrrelge
+    const found = dbProducts.find(element => element.id === Number(idRef.current.value)); // vt üles ja võrrelge
     if (found === undefined) {
       setIdUnique(true);
     } else {
       setIdUnique(false);
     }
+  }
+
+  if (isLoading === true) {
+    return (<Spinner />);
   }
 
   return (
