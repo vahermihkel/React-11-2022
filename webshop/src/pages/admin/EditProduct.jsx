@@ -31,6 +31,7 @@ const EditProduct = () => {
   const index = dbProducts.indexOf(productFound);
   const [idUnique, setIdUnique] = useState(true);
   const [isLoading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const idRef = useRef();
   const nameRef = useRef();
@@ -42,11 +43,16 @@ const EditProduct = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
+
+    fetch(config.categoriesDbUrl)
+      .then(res => res.json())
+      .then(json => setCategories(json || []));
+
     fetch(config.productsDbUrl)
       .then(res => res.json())
       .then(json => {
-        setDbProducts(json);
+        setDbProducts(json || []);
         setLoading(false);
       })
   }, []);
@@ -100,7 +106,10 @@ const EditProduct = () => {
           <label>Image</label> <br />
           <input ref={imageRef} defaultValue={productFound.image} type="text" /> <br />
           <label>Category</label> <br />
-          <input ref={categoryRef} defaultValue={productFound.category} type="text" /> <br />
+          {/* <input ref={categoryRef} defaultValue={productFound.category} type="text" /> <br /> */}
+          <select ref={categoryRef} defaultValue={productFound.category}>
+            {categories.map(element => <option key={element.name}>{element.name}</option>)}
+          </select> <br />
           <label>Description</label> <br />
           <input ref={descriptionRef} defaultValue={productFound.description} type="text" /> <br />
           <label>Active</label> <br />

@@ -13,10 +13,10 @@ const AdminHome = () => {
       <Link to="/admin/maintain-products">
         <Button>{t("maintain-products")}</Button>
       </Link>
-      <Link to="/maintain-categories">
+      <Link to="/admin/maintain-categories">
         <Button>{t("maintain-categories")}</Button>
       </Link>
-      <Link to="/maintain-shops">
+      <Link to="/admin/maintain-shops">
         <Button>{t("maintain-shops")}</Button>
       </Link>
     </div>

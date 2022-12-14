@@ -20,15 +20,49 @@ const AddProduct = () => {
   const activeRef = useRef();
   const [idUnique, setIdUnique] = useState(true);
   const [dbProducts, setDbProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const { t } = useTranslation();
 
   useEffect(() => {
+    fetch(config.categoriesDbUrl)
+      .then(res => res.json())
+      .then(json => setCategories(json || []));
+      
     fetch(config.productsDbUrl)
       .then(res => res.json())
-      .then(json => setDbProducts(json))
+      .then(json => setDbProducts(json || []))
   }, []);
 
   const addProduct = () => {
+    if (idRef.current.value === "") {
+      toast.error("Id lisamata");
+      return;    // return lõpetab funktsiooni
+    }
+    if (nameRef.current.value === "") {
+      toast.error("Nimi lisamata");
+      return;
+    } // /^[A-ZÜÕÖÄ]+/
+    if (/^[A-ZÖÄÜÕ].*/.test(nameRef.current.value) === false) {
+      toast.error("Nimi peab algama suure algustähega");
+      return;
+    }
+    if (priceRef.current.value === "") {
+      toast.error("Hind lisamata");
+      return;
+    }
+    if (imageRef.current.value === "") {
+      toast.error("Pilt lisamata");
+      return;
+    }
+    if (/^\S*$/.test(imageRef.current.value) === false) {
+      toast.error("Pildi aadressis on tühik");
+      return;
+    }
+    if (descriptionRef.current.value === "") {
+      toast.error("Kirjeldus lisamata");
+      return;
+    }
+
     const newProduct = {
       "id": Number(idRef.current.value),
       "name": nameRef.current.value,
@@ -77,7 +111,10 @@ const AddProduct = () => {
         <label>Image</label> <br />
         <input ref={imageRef} type="text" /> <br />
         <label>Category</label> <br />
-        <input ref={categoryRef} type="text" /> <br />
+        {/* <input ref={categoryRef} type="text" /> <br /> */}
+        <select ref={categoryRef}>
+          {categories.map(element => <option key={element.name}>{element.name}</option>)}
+        </select> <br />
         <label>Description</label> <br />
         <input ref={descriptionRef} type="text" /> <br />
         <label>Active</label> <br />
