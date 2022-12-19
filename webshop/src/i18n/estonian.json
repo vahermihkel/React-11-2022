@@ -1,0 +1,12 @@
+{
+    "translation": {
+      "admin": "Admin vaatesse",
+      "shops": "Meie poed",
+      "cart": "Ostukorvi",
+      "add-product": "Lisa toode",
+      "maintain-products": "Halda tooteid",
+      "maintain-categories": "Halda kategooriaid",
+      "maintain-shops": "Halda poode",
+      "successfully-deleted": "Toode edukalt kustutatud"
+    }
+  }

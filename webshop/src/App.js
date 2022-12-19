@@ -59,12 +59,12 @@ export default App;
 // Dünaamiline CSS klass++++
 // Props ehk child componendid
 // CSS moodulid
-// useContext ehk globaalsed muutujad
 // Tõstame tõlked eraldi failidesse
 // KOJU: print-screenidena poed andmebaasi
 // KOJU: Nortali Proovitöö
 
 // 14.nes   21.12
+// useContext ehk globaalsed muutujad
 // Sisselogimine/Registreerumine API päringut
 // KOJU: Nortali Proovitöö edasi tegemine
 

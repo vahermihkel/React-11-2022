@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom";
-import "../css/Cart.css";
+import ParcelMachines from "../components/cart/ParcelMachines";
+import Payment from "../components/cart/Payment";
+import styles from "../css/Cart.module.css";
 
 const Cart = () => {
-  // KODUS: Ostukorvi loogika eesti keelse projekti järgi
-  // Kuvage välja kõik ostukorvi esemed
-  // a) peast   b) proovida mõne kodutöö järgi   c) eesti keelsest projektist vaadata
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
-  const [parcelMachines, setParcelMachines] = useState([]);
-
-  useEffect(() => {
-    fetch("https://www.omniva.ee/locations.json")
-      .then(res => res.json())
-      .then(json => setParcelMachines(json));
-  }, []);
-
 
   const removeFromCart = (index) => {
     cart.splice(index,1);
@@ -57,32 +48,6 @@ const Cart = () => {
     // uuendan LS
   }
 
-  const pay = () => {
-    const paymentUrl = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
-
-    const paymentData = {
-      "api_username": "92ddcfab96e34a5f",
-      "account_name": "EUR3D1",
-      "amount": calculateCartSum(),
-      "order_reference": Math.random() * 9999999,
-      "nonce": "a9b7f7e79fsdfsd" + Math.random() * 9999999 + new Date(),
-      "timestamp": new Date(),
-      "customer_url": "https://react-11-2022.web.app"
-      };
-
-    const paymentHeaders = {
-      "Authorization": "Basic OTJkZGNmYWI5NmUzNGE1Zjo4Y2QxOWU5OWU5YzJjMjA4ZWU1NjNhYmY3ZDBlNGRhZA==",
-      "Content-Type": "application/json"
-    };
-
-    fetch(paymentUrl, {
-      "method": "POST",
-      "body": JSON.stringify(paymentData),
-      "headers": paymentHeaders
-    }).then(res => res.json())
-        .then(json => window.location.href = json.payment_link);
-  }
-
   // useNavigate ---> suuna JavaScriptis Reacti siseselt
   // <Link to=""> ---> suuna HTML-s Reacti siseselt
   // window.location.href ---> suuna rakendusest väljas olevale URL-le
@@ -90,35 +55,32 @@ const Cart = () => {
   return (
     <div>
       {cart.length === 0 && <div>Ostukorv on tühi. <Link to="/">Tooteid lisama</Link></div>}
-      <div className="cart-top">
+      {/* <div className={styles["cart-top"]}> */}
+      <div className={styles.cart__top}>
         {cart.length > 0 && <button onClick={emptyCart}>Tühjenda</button>}
         {cart.length > 0 && <div>{cart.length} tk</div> }
       </div>
       {cart.map((e, i) => 
-        <div key={i} className="product">
-          <img className="image" src={e.product.image} alt="" />
-          <div className="name">{e.product.name}</div>
-          <div className="price">{e.product.price.toFixed(2)} €</div>
-          <div className="quantity">
-            <img className="button" onClick={() => decreaseQuantity(i)} src="/minus.png" alt="" />
+        <div key={i} className={styles.product}>
+          <img className={styles.image} src={e.product.image} alt="" />
+          <div className={styles.name}>{e.product.name}</div>
+          <div className={styles.price}>{e.product.price.toFixed(2)} €</div>
+          <div className={styles.quantity}>
+            <img className={styles.button} onClick={() => decreaseQuantity(i)} src="/minus.png" alt="" />
             <div>{e.quantity} tk</div>
-            <img className="button" onClick={() => increaseQuantity(i)} src="/plus.png" alt="" />
+            <img className={styles.button} onClick={() => increaseQuantity(i)} src="/plus.png" alt="" />
           </div>
-          <div className="sum">{(e.product.price * e.quantity).toFixed(2)} €</div>
-          <img className="button remove" onClick={() => removeFromCart(i)} src="/remove.png" alt="" />
+          <div className={styles.sum}>{(e.product.price * e.quantity).toFixed(2)} €</div>
+          <img className={`${styles.button} ${styles.remove}`} onClick={() => removeFromCart(i)} src="/remove.png" alt="" />
         </div>)}
 
       {cart.length > 0 && 
-        <div className="cart-bottom">
+        <div className={styles.cart__bottom}>
           <div>{calculateCartSum()} €</div>
 
-          <select>
-            {parcelMachines
-              .filter(element => element.A0_NAME === "EE")
-              .map(element => <option key={element.NAME}>{element.NAME}</option>)}
-          </select>
+          <ParcelMachines />
 
-          <button onClick={pay}>Maksma</button>
+          <Payment sum={calculateCartSum()} />
         </div>}
     </div>
   )
