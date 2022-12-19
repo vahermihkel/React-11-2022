@@ -45,6 +45,13 @@ const MaintainProducts = () => {
     setProducts(result);
   }
 
+  const changeProductActiveness = (productClicked) => {
+    const index = dbProducts.findIndex(element => element.id === productClicked.id);
+    dbProducts[index].active = !dbProducts[index].active;
+    searchProducts();
+    fetch(config.productsDbUrl, {"method": "PUT", "body": JSON.stringify(dbProducts)});
+  }
+
   if (isLoading === true) {
     return (<Spinner />);
   }
@@ -54,13 +61,15 @@ const MaintainProducts = () => {
       <input ref={searchedRef} onChange={searchProducts} type="text" />
       <div>{products.length} tk</div>
       {products.map((element) => 
-        <div className={element.active === true ? "active-product" : undefined} key={element.id}>
-          <img src={element.image} alt="" />
-          <div>{element.name}</div>
-          <div>{element.price} €</div>
-          <div>{element.id}</div>
-          <div>{element.description}</div>
-          <div>{element.category}</div>
+        <div className={element.active === true ? "active-product" : "inactive-product"} key={element.id}>
+          <div onClick={() => changeProductActiveness(element)}>
+            <img src={element.image} alt="" />
+            <div>{element.name}</div>
+            <div>{element.price} €</div>
+            <div>{element.id}</div>
+            <div>{element.description}</div>
+            <div>{element.category}</div>
+          </div>
           <button onClick={() => remove(element)}>x</button>
           <Link to={"/admin/edit-product/" + element.id}>
             <button>Muuda</button>

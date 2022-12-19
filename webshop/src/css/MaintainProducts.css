@@ -1,3 +1,11 @@
 .active-product {
   border: 1px solid green; /* paksus, liik, värv */
+  margin: 5px;
+  background-color: rgb(242, 255, 242);
+}
+
+.inactive-product {
+  border: 1px solid red;
+  margin: 5px;
+  background-color: rgb(255, 240, 240);
 }

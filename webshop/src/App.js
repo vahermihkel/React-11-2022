@@ -1,7 +1,4 @@
-import { Link, Route, Routes } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
 
@@ -15,34 +12,15 @@ import EditProduct from './pages/admin/EditProduct';
 import MaintainCategories from './pages/admin/MaintainCategories';
 import MaintainProducts from './pages/admin/MaintainProducts';
 import MaintainShops from './pages/admin/MaintainShops';
-import { useTranslation } from 'react-i18next';
 import { ContactUs } from './pages/ContactUs';
+import NavigationBar from './components/NavigationBar';
 
 function App() {
-  const { t, i18n } = useTranslation();
-
-  const changeLang = (newLanguage) => {
-    i18n.changeLanguage(newLanguage);
-    localStorage.setItem("language", newLanguage);
-  }
 
   return (
     <div className="App">
 
-      <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand as={Link} to="/">Webshop</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/admin">{t('admin')}</Nav.Link>
-            <Nav.Link as={Link} to="/shops">{t('shops')}</Nav.Link>
-            <Nav.Link as={Link} to="/contact">Kontakteeru meiega</Nav.Link>
-            <Nav.Link as={Link} to="/cart">{t('cart')}</Nav.Link>
-          </Nav>
-          <img className="lang" src="/english.png" alt="" onClick={() => changeLang("en")} />
-          <img className="lang" src="/estonia.png" alt="" onClick={() => changeLang("ee")} />
-        </Container>
-      </Navbar>
-      
+      <NavigationBar />
 
       <Routes>
         <Route path="" element={ <Homepage /> } />
@@ -64,27 +42,60 @@ function App() {
 export default App;
 
 // 8.12
-// Leaflet kaardirakenduse, kuhu kuvame meie poed
-// API päringuid tegema nr 1 võtame pakiautomaadid Omniva lehelt
-// Firebase-i jälle projekti
-// Paneme ebay tooted Firebase-i
+// Leaflet kaardirakenduse, kuhu kuvame meie poed++++
+// API päringuid tegema nr 1 võtame pakiautomaadid Omniva lehelt++++
+// Firebase-i jälle projekti++++
+// Paneme ebay tooted Firebase-i++++
 
-// Firebase-st teeme API päringuid, et sealt andmeid kätte saada
-// Firebase-i hakkame andmeid sisestama API päringute kaudu
 
-// Kategooriad Firebase andmebaasi
-// Poed Firebase andmebaasi
-// Makse API päring
+// Firebase-st teeme API päringuid, et sealt andmeid kätte saada++++
+// Firebase-i hakkame andmeid sisestama API päringute kaudu++++
 
-// Dünaamiline CSS klass
+// Kategooriad Firebase andmebaasi++++
+// Poed Firebase andmebaasi -> koju saadetud
+// Makse API päring++++
 
+// 13.nes   19.12
+// Dünaamiline CSS klass++++
 // Props ehk child componendid
-
+// CSS moodulid
 // useContext ehk globaalsed muutujad
+// Tõstame tõlked eraldi failidesse
+// KOJU: print-screenidena poed andmebaasi
+// KOJU: Nortali Proovitöö
 
+// 14.nes   21.12
 // Sisselogimine/Registreerumine API päringut
+// KOJU: Nortali Proovitöö edasi tegemine
+
+// 15.nes   26.12
+// Natuke näitan Nortali proovitööd
 // Karusell-galerii
 // Piltide URL asemel failide üleslaadimine
 // Radio buttonid
 
+// 16.nes   28.12
+// lahendame proovitööd: Nortali proovitöö --> teeme lõpuni ära
 // Wordpressi projekt
+// KOJU: Iseseisev lõpuprojekt
+
+// 17.nes   02.01
+// tõstatada iseseisva projekti mingeid teemasid
+// Wordpressi projekt
+// KOJU: Iseseisev lõpuprojekt
+
+// Ei tee:
+// Leheküljenumbrid
+// Näita veel tooteid
+// Toastid täita - mingid kustutamise/muutmised
+// URL tõlke alla ---> i18n.js
+// Terve projekt tõlge ---> i18n.js
+// Maksma juures saab valida ka arvega --> emailjs.com
+//        saadetakse e-mail koos kogusumma ja toodetega -> vormi kaudu küsiks ka nime ja e-maili
+
+// 18.nes 11.01
+//mina midagi ei räägi, teie poolt lõpuprojekti esitlus
+// 11.01
+
+// Lõpuprojekt: oleks tehtud Reactis
+// https://proovitoo.twn.ee/

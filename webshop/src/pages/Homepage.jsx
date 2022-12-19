@@ -90,8 +90,11 @@ const Homepage = () => {
     // console.log(products);
     const result = dbProducts.filter(element => element.category === categoryClicked);
     // console.log(result);
+    setActiveCategory(categoryClicked);
     setProducts(result);
   }
+
+  const [activeCategory, setActiveCategory] = useState("");
 
   if (isLoading === true) {
     return (<Spinner />);
@@ -108,7 +111,9 @@ const Homepage = () => {
       <button onClick={() => filterProducts("tent")}>tent</button>
       <button onClick={() => filterProducts("ebay")}>ebay</button> */}
       { categories.map(element => 
-        <button key={element} onClick={() => filterProducts(element)}>{element}</button>
+        <button key={element} className={element === activeCategory ? "active-category" : undefined} onClick={() => filterProducts(element)}>
+          {element}
+        </button>
         ) }
       {products.map(element => 
         <div key={element.id}>
