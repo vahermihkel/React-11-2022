@@ -1,21 +1,25 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link } from "react-router-dom";
 import ParcelMachines from "../components/cart/ParcelMachines";
 import Payment from "../components/cart/Payment";
 import styles from "../css/Cart.module.css";
+import CartSumContext from '../store/CartSumContext';
 
 const Cart = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const cartSumCtx = useContext(CartSumContext);
 
   const removeFromCart = (index) => {
     cart.splice(index,1);
     setCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
+    cartSumCtx.setCartSum(calculateCartSum());
   }
 
   const emptyCart = () => {
     setCart([]);
     localStorage.setItem("cart", JSON.stringify([]));
+    cartSumCtx.setCartSum("0.00");
   }
 
   const calculateCartSum = () => {
@@ -38,6 +42,7 @@ const Cart = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
     // uuendan HTMLi
     // uuendan LS
+    cartSumCtx.setCartSum(calculateCartSum());
   }
   
   const increaseQuantity = (index) => {
@@ -46,6 +51,7 @@ const Cart = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
     // uuendan HTMLi
     // uuendan LS
+    cartSumCtx.setCartSum(calculateCartSum());
   }
 
   // useNavigate ---> suuna JavaScriptis Reacti siseselt

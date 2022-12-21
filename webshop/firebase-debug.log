@@ -1,0 +1,38 @@
+[debug] [2022-12-21T17:16:46.512Z] ----------------------------------------------------------------------
+[debug] [2022-12-21T17:16:46.516Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vahermih\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-12-21T17:16:46.516Z] CLI Version:   11.17.0
+[debug] [2022-12-21T17:16:46.516Z] Platform:      win32
+[debug] [2022-12-21T17:16:46.516Z] Node Version:  v16.13.1
+[debug] [2022-12-21T17:16:46.517Z] Time:          Wed Dec 21 2022 19:16:46 GMT+0200 (Ida-Euroopa standardaeg)
+[debug] [2022-12-21T17:16:46.518Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-21T17:16:46.526Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-12-21T17:16:46.656Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-21T17:16:46.657Z] > authorizing via signed-in user (mihkelreact@gmail.com)
+[debug] [2022-12-21T17:16:46.658Z] [iam] checking project react-mihkel-webshop-11-2022 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-21T17:16:46.660Z] > refreshing access token with scopes: []
+[debug] [2022-12-21T17:16:46.661Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-12-21T17:16:46.661Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-21T17:16:46.978Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-12-21T17:16:46.979Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-21T17:16:46.997Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-mihkel-webshop-11-2022:testIamPermissions [none]
+[debug] [2022-12-21T17:16:46.997Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-mihkel-webshop-11-2022:testIamPermissions x-goog-quota-user=projects/react-mihkel-webshop-11-2022
+[debug] [2022-12-21T17:16:46.997Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-mihkel-webshop-11-2022:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-21T17:16:47.149Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-12-21T17:16:47.149Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-12-21T17:16:48.028Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-mihkel-webshop-11-2022:testIamPermissions 200
+[debug] [2022-12-21T17:16:48.028Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/react-mihkel-webshop-11-2022:testIamPermissions {}
+[debug] [2022-12-21T17:16:48.029Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project react-mihkel-webshop-11-2022:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2022-12-21T17:16:48.032Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/react-mihkel-webshop-11-2022 [none]
+[debug] [2022-12-21T17:16:48.570Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/react-mihkel-webshop-11-2022 403
+[debug] [2022-12-21T17:16:48.570Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/react-mihkel-webshop-11-2022 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2022-12-21T17:16:48.571Z] HTTP Error: 403, The caller does not have permission
+[debug] [2022-12-21T17:16:48.574Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\vahermih\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\vahermih\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:288:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to get Firebase project react-mihkel-webshop-11-2022. Please make sure the project exists and your account has permission to access it.

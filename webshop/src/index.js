@@ -7,6 +7,8 @@ import './index.css';
 import './i18n';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { CartSumContextProvider } from './store/CartSumContext';
+import { AuthContextProvider } from './store/AuthContext';
 
 // Navigeerimiseks:
 // 1. npm i react-router-dom <- vajalikud failid node_modules sisse
@@ -17,7 +19,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <CartSumContextProvider>
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
+      </CartSumContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import CartSumContext from "../../store/CartSumContext";
 
 const Product = (props) => {
+
+  const cartSumCtx = useContext(CartSumContext);
     // {
   //   "id":11391368,
   //   "image":"https://i.ebayimg.com/thumbs/images/g/rI0AAOSwt-RjdaZp/s-l225.webp","name":"Camping Tent Poles",
@@ -34,10 +38,13 @@ const Product = (props) => {
       // kui ei ole ostukorvis, lisa ta kõige lõppu, kogusega 1
       cartLS.push({"product": productClicked, "quantity": 1});
     }
+
+    let cartSum = 0;
+    cartLS.forEach(cartItem => cartSum = cartSum + cartItem.product.price * cartItem.quantity);
+    cartSumCtx.setCartSum(cartSum.toFixed(2));
+
     cartLS = JSON.stringify(cartLS);
     localStorage.setItem("cart", cartLS);
-    // 1., 2., 3., 4., 5.
-    // a) peast   b) proovida mõne kodutöö järgi   c) eesti keelsest projektist vaadata
   }
 
   // SELLE TEEME KOOS:
