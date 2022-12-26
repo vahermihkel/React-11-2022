@@ -82,7 +82,6 @@ export default App;
 // KOJU: Nortali Proovitöö edasi tegemine
 
 // 15.nes   26.12
-// Natuke näitan Nortali proovitööd
 // Karusell-galerii
 // Piltide URL asemel failide üleslaadimine
 // Radio buttonid
@@ -106,7 +105,7 @@ export default App;
 // Maksma juures saab valida ka arvega --> emailjs.com
 //        saadetakse e-mail koos kogusumma ja toodetega -> vormi kaudu küsiks ka nime ja e-maili
 
-// 18.nes 11.01
+// 18.nes 10.01   T
 //mina midagi ei räägi, teie poolt lõpuprojekti esitlus
 // 11.01
 

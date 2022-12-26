@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
+import CarouselGallery from "../components/home/CarouselGallery";
 // import { Link } from "react-router-dom";
 import Product from "../components/home/Product";
 import SortButtons from "../components/home/SortButtons";
@@ -38,6 +39,8 @@ const Homepage = () => {
 
   return (
     <div>
+      <CarouselGallery />
+      
       <SortButtons 
         products={products} 
         setProducts={setProducts} />
