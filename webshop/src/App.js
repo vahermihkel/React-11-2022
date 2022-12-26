@@ -18,9 +18,12 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { useContext } from 'react';
 import AuthContext from './store/AuthContext';
+import MaintainImages from './pages/admin/MaintainImages';
+import { useTranslation } from 'react-i18next';
 
 function App() {
   const authCtx = useContext(AuthContext);
+  const { t } = useTranslation();
 
   return (
     <div className="App">
@@ -29,8 +32,8 @@ function App() {
 
       <Routes>
         <Route path="" element={ <Homepage /> } />
-        <Route path="cart" element={ <Cart /> } />
-        <Route path="shops" element={ <Shops /> } />
+        <Route path={t("url.cart")} element={ <Cart /> } />
+        <Route path={t("url.shops")} element={ <Shops /> } />
         <Route path="product/:id" element={ <SingleProduct /> } />
         <Route path="contact" element={ <ContactUs /> } />
         <Route path="login" element={ <Login /> } />
@@ -43,6 +46,7 @@ function App() {
           <Route path="admin/maintain-categories" element={ <MaintainCategories /> } />
           <Route path="admin/maintain-products" element={ <MaintainProducts /> } />
           <Route path="admin/maintain-shops" element={ <MaintainShops /> } />
+          <Route path="admin/maintain-images" element={ <MaintainImages /> } />
         </>}
         { authCtx.loggedIn === false &&
           <Route path="admin/*" element={ <Navigate to="/login" /> } />
@@ -84,7 +88,8 @@ export default App;
 // 15.nes   26.12
 // Karusell-galerii
 // Piltide URL asemel failide üleslaadimine
-// Radio buttonid
+// Radio buttonid 
+// URL tõlke alla ---> i18n.js
 
 // 16.nes   28.12
 // lahendame proovitööd: Nortali proovitöö --> teeme lõpuni ära
@@ -100,7 +105,6 @@ export default App;
 // Leheküljenumbrid
 // Näita veel tooteid
 // Toastid täita - mingid kustutamise/muutmised
-// URL tõlke alla ---> i18n.js
 // Terve projekt tõlge ---> i18n.js
 // Maksma juures saab valida ka arvega --> emailjs.com
 //        saadetakse e-mail koos kogusumma ja toodetega -> vormi kaudu küsiks ka nime ja e-maili

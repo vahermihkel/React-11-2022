@@ -1,8 +1,15 @@
 {
   "translation": {
-    "admin": "To admin view",
-    "shops": "Our shops",
-    "cart": "Cart",
+    "nav": {
+      "admin": "To admin view",
+      "shops": "Our shops",
+      "cart": "Cart"
+    },
+    "url": {
+      "admin": "admin",
+      "shops": "shops",
+      "cart": "cart"
+    },
     "add-product": "Add product",
     "maintain-products": "Maintain products",
     "maintain-categories": "Maintain categories",

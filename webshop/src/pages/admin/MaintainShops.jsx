@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import config from "../../data/config.json";
 
-const MaintainCategories = () => {
+const MaintainShops = () => {
   const [isLoading, setLoading] = useState(false);
   const [shops, setShops] = useState([]);
   const xCoordRef = useRef();
@@ -64,11 +64,14 @@ const MaintainCategories = () => {
       <button onClick={addShop}>Lisa</button> <br />
       {shops.map((element,i) => 
         <div key={i}>
-          {element.name}
+          <div>x: {element.xCoord}</div>
+          <div>y: {element.yCoord}</div>
+          <div>{element.name}</div>
+          <div>{element.openTime}</div>
           <button onClick={() => removeShop(i)}>x</button>
         </div>)}
     </div>
   )
 }
 
-export default MaintainCategories
+export default MaintainShops

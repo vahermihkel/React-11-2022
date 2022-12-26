@@ -19,6 +19,9 @@ const AdminHome = () => {
       <Link to="/admin/maintain-shops">
         <Button>{t("maintain-shops")}</Button>
       </Link>
+      <Link to="/admin/maintain-images">
+        <Button>Halda karusell-galerii pilte</Button>
+      </Link>
     </div>
   )
 }

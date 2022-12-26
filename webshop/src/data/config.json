@@ -1,5 +1,6 @@
 {
   "productsDbUrl": "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json",
   "categoriesDbUrl": "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/categories.json",
-  "shopsDbUrl": "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/shops.json"
+  "shopsDbUrl": "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/shops.json",
+  "imagesDbUrl": "https://react-mihkel-webshop-11-2022-default-rtdb.europe-west1.firebasedatabase.app/images.json"
 }
