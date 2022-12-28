@@ -92,22 +92,22 @@ export default App;
 // URL tõlke alla ---> i18n.js
 
 // 16.nes   28.12
-// lahendame proovitööd: Nortali proovitöö --> teeme lõpuni ära
-// Wordpressi projekt
-// KOJU: Iseseisev lõpuprojekt
+// lahendame proovitöö 1. punkti: Nortali proovitöö
+// Leheküljenumbrid
+// Maksma juures saab valida ka arvega --> emailjs.com
+//        saadetakse e-mail koos kogusumma ja toodetega -> vormi kaudu küsiks ka nime ja e-maili
+// KOJU: Nortali 2-4 punkt + Iseseisev lõpuprojekt
 
 // 17.nes   02.01
+// lahendame: Nortali proovitöö --> teeme lõpuni ära
 // tõstatada iseseisva projekti mingeid teemasid
-// Wordpressi projekt
+// ?????
 // KOJU: Iseseisev lõpuprojekt
 
 // Ei tee:
-// Leheküljenumbrid
-// Näita veel tooteid
+// Näita veel tooteid ---> mul pole õnnestunud
 // Toastid täita - mingid kustutamise/muutmised
 // Terve projekt tõlge ---> i18n.js
-// Maksma juures saab valida ka arvega --> emailjs.com
-//        saadetakse e-mail koos kogusumma ja toodetega -> vormi kaudu küsiks ka nime ja e-maili
 
 // 18.nes 10.01   T
 //mina midagi ei räägi, teie poolt lõpuprojekti esitlus

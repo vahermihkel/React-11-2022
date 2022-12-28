@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom";
+import OrderEmail from "../components/cart/OrderEmail";
 import ParcelMachines from "../components/cart/ParcelMachines";
 import Payment from "../components/cart/Payment";
 import styles from "../css/Cart.module.css";
@@ -87,6 +88,10 @@ const Cart = () => {
           <ParcelMachines />
 
           <Payment sum={calculateCartSum()} />
+          <OrderEmail 
+            products={cart} 
+            sum={calculateCartSum()}
+            />
         </div>}
     </div>
   )
